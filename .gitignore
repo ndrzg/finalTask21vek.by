@@ -1,0 +1,10 @@
+package-lock.json
+.package-lock.json
+build
+node_modules
+coverage
+allure-results
+videos
+screenshots
+reports
+.DS_Store
