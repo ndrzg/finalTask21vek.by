@@ -8,3 +8,4 @@ videos
 screenshots
 reports
 .DS_Store
+.eslintrc.json

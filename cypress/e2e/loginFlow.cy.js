@@ -5,14 +5,13 @@ const userAccount = require('./pages/userAccount');
 describe('Suite for login functionalities', ()=> {
 
     beforeEach(() => {
-            cy.visit(Cypress.env('url'))
-            basePage.closeCookieBanner()
-        })
-        
-    it('Verifies that error message displayes when incorrect credentials are entered', ()=>{            
-           loginFlow.unsuccessfulLogIn()
+        cy.visit(Cypress.env('url'))
+        basePage.closeCookieBanner()
     })
-
+        
+    it.only('Verifies that error message displayes when incorrect credentials are entered', ()=>{            
+        loginFlow.unsuccessfulLogIn()
+    })
     it('Verifies sucessful login with valid credentails', ()=>{
         loginFlow.successfulLogIn()
         userAccount.openAccountModal()
@@ -20,10 +19,13 @@ describe('Suite for login functionalities', ()=> {
     })
     it('Verifies that its possible to log out', () => {
         loginFlow.successfulLogIn()
-        userAccount.logOut()
+        loginFlow.logOut()
     })
-    it.skip('verifies that its possible to reset password', () => {
-        userAccount.resetPassword()
+    it('Verfies that its possible to create new user', ()=>{
+        loginFlow.newAccountCreation()
+    })
+    it('verifies that its possible to reset password', () => {
+        loginFlow.resetPassword()
     })
 
 

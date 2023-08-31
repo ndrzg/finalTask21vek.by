@@ -6,6 +6,8 @@ class Header {
         this.clearSearchFieldButton = () => cy.get('.Search_clearBtn__3iMtB');
         this.shoppingСartButton = () => cy.get('.headerCartBox');
         this.discountProductsButton = () => cy.get('[href="/special_offers/promo.html?discountTypes=sale"]');
+        this.headerCounter = () => cy.get('[data-testid="header-count"]')
+        
     }
 
     
@@ -20,9 +22,9 @@ class Header {
         this.searchingResults().contains(searchingItem).click()
     }
 
-    searchForProductAndSelect(searchRequest, searchingItem){
+    searchForProductAndSelect(searchRequest){
         this.enterSearchRequest(searchRequest)
-        this.searchingResults().click()
+        this.searchingResults().contains(searchRequest).click()
     }
 
     clearSearchField(searchRequest){
@@ -30,6 +32,9 @@ class Header {
         this.clearSearchFieldButton().click()
         this.searchInputField().should('have.attr', 'placeholder', 'Поиск товаров');
 
+    }
+    openChart(){
+        this.shoppingСartButton().click()
     }
     
 }

@@ -11,9 +11,9 @@ module.exports = defineConfig({
   },
   e2e: {
     
-    setupNodeEvents(on, config) {
-      require('cypress-mochawesome-reporter/plugin')(on)
-    },
+    // setupNodeEvents(on, config) {
+    //   require('cypress-mochawesome-reporter/plugin')(on)
+    // },
     autoRun: false,
     watchForFileChanges: false,
     defaultCommandTimeout:7000,
@@ -22,7 +22,7 @@ module.exports = defineConfig({
     log: {
       level: 'error'
     },
-    //specPattern: "cypress/integration/api-tests/*.spec.{js,jsx,ts,tsx}"
+    specPattern: "cypress/integration/*.spec.{js,jsx,ts,tsx}"
     
   },
 });

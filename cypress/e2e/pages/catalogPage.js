@@ -1,3 +1,5 @@
+const header = require("../components/header");
+
 class CatalogPage {
     constructor(){
         this.privacyPopUpCloseButon = () => cy.get('.osano-cm-dialog__close.osano-cm-close');
@@ -17,6 +19,8 @@ class CatalogPage {
         this.addFavoritesButton= () => cy.get('#favoriteOldProductCard > .g-pseudo_href')
         this.selectCourierDelivery = () => cy.get('[data-testid="deliveryItem-courier"] > .DeliveryField_item__3Iwc1 > label > .Radio_label__1Fl2c')
         this.phoneForDeliveryField = () => cy.get('.style_phoneInput__McmXH > input')
+        this.multipyProductInChart = () => cy.get('[aria-label="Увеличение количества"]')
+        this.productCounter = () => cy.get('.Counter_counterInput__b-ehV')
     }   
 
     addToFavorites(){
@@ -51,12 +55,7 @@ class CatalogPage {
         this.deliveryDateSelector().click()
         this.suggestedDeliveryDateSelector().click()
         this.timeSelector().click()
-        //cy.get('.DeliveryIntervals_selectList__1YUkV').first().click()
         this.suggestedTimeSelector().first().click()
-     
-        //this.suggestedTimeSelector().click()
-
-        //cy.get('.styles_selectList__Aqpxi > li:nth-child(1)').should('be.visible').click()
         this.saveButton().click()
     }
 
@@ -78,14 +77,28 @@ class CatalogPage {
         cy.get('.style_promoDiscount__2Z5dm')  
             .each(($element) => {
         const discountText = $element.text();  
-        const discountValue = parseInt(discountText);  
-        expect(discountValue).to.be.greaterThan(-49.9);
+        const discountValue = Math.abs(parseInt(discountText));  
+        expect(discountValue).to.be.greaterThan(49.9);
         });
     }
 
     selectOnlinePaymentByCC(){
         cy.get('.styles_selectValue__2wP2f').click()
         cy.get('[data-testid="online-pay-method"]').click()
+    }
+
+    addMultipyProductIntoChart(){
+        this.addProductIntoChart('xiaomi')
+        header.openChart()
+        this.multipyProductInChart().click()
+        this.productCounter().should('exist').click()   
+        header.headerCounter()
+        .invoke('text')
+        .then((text) => {
+
+          const count = parseInt(text);
+          expect(count).to.equal(2);
+        });
     }
 
 }
